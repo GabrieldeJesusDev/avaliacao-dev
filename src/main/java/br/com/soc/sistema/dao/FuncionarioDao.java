@@ -105,8 +105,20 @@ public class FuncionarioDao extends Dao {
 		return null;
 	}
 
+	//Atualiza os dados de um funcionario que ja existe no banco
 	public void updateFuncionario(FuncionarioVo funcionarioVo) {
-		// Vamos implementar esse metodo.
+		StringBuilder query = new StringBuilder("UPDATE funcionario SET nm_funcionario = ? WHERE rowid = ?");
+		try (Connection con = getConexao();
+			 PreparedStatement ps = con.prepareStatement(query.toString())){
+			
+			int i=1;
+			ps.setString(i++, funcionarioVo.getNome());
+			ps.setString(i++, funcionarioVo.getRowid());
+			ps.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

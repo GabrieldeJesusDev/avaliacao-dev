@@ -32,6 +32,7 @@ public class FuncionarioAction extends Action {
 		return SUCCESS;
 	}
 
+	//Direciona o fluxo para inclusao ou atualizacao do funcionario
 	public String novo() {
 		if (funcionarioVo.getNome() == null)
 			return INPUT;

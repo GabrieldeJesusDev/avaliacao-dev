@@ -63,6 +63,7 @@ public class FuncionarioBusiness {
 		}
 	}
 
+	//Valida os dados e solicita a atualizacao do funcionario
 	public void atualizarFuncionario(FuncionarioVo funcionarioVo) {
 		try {
 			if (funcionarioVo.getNome().isEmpty())
