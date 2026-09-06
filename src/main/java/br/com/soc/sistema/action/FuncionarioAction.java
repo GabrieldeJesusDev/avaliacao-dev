@@ -11,49 +11,53 @@ import br.com.soc.sistema.infra.OpcoesComboBuscar;
 import br.com.soc.sistema.vo.FuncionarioVo;
 
 public class FuncionarioAction extends Action {
-	
+
 	private List<FuncionarioVo> funcionarios = new ArrayList<>();
 	private FuncionarioBusiness business = new FuncionarioBusiness();
 	private FuncionarioFilter filtrar = new FuncionarioFilter();
 	private FuncionarioVo funcionarioVo = new FuncionarioVo();
-	
+
 	public String todos() {
-		funcionarios.addAll(business.trazerTodosOsFuncionarios());	
+		funcionarios.addAll(business.trazerTodosOsFuncionarios());
 
 		return SUCCESS;
 	}
-	
+
 	public String filtrar() {
-		if(filtrar.isNullOpcoesCombo())
+		if (filtrar.isNullOpcoesCombo())
 			return REDIRECT;
-		
+
 		funcionarios = business.filtrarFuncionarios(filtrar);
-		
+
 		return SUCCESS;
 	}
-	
+
 	public String novo() {
-		if(funcionarioVo.getNome() == null)
+		if (funcionarioVo.getNome() == null)
 			return INPUT;
-		
-		business.salvarFuncionario(funcionarioVo);
-		
+
+		if (funcionarioVo.getRowid() != null) {
+			business.atualizarFuncionario(funcionarioVo);
+		} else {
+
+			business.salvarFuncionario(funcionarioVo);
+		}
 		return REDIRECT;
 	}
-	
+
 	public String editar() {
-		if(funcionarioVo.getRowid() == null)
+		if (funcionarioVo.getRowid() == null)
 			return REDIRECT;
-		
+
 		funcionarioVo = business.buscarFuncionarioPor(funcionarioVo.getRowid());
-		
+
 		return INPUT;
 	}
-	
-	public List<OpcoesComboBuscar> getListaOpcoesCombo(){
+
+	public List<OpcoesComboBuscar> getListaOpcoesCombo() {
 		return Arrays.asList(OpcoesComboBuscar.values());
 	}
-	
+
 	public List<FuncionarioVo> getFuncionarios() {
 		return funcionarios;
 	}

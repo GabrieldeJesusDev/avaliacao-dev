@@ -104,4 +104,9 @@ public class FuncionarioDao extends Dao {
 		}		
 		return null;
 	}
+
+	public void updateFuncionario(FuncionarioVo funcionarioVo) {
+		// Vamos implementar esse metodo.
+		
+	}
 }
