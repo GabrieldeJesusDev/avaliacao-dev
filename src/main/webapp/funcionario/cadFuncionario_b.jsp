@@ -115,8 +115,9 @@
 		
 	<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
-	// Configura o modal de exclusao com o funcionario selecionado
 	<script>
+	// Configura o modal de exclusao com o funcionario selecionado 
+
 		var modalExclusao = document.getElementById('confirmarExclusao');
 
 		modalExclusao.addEventListener('show.bs.modal', function(event) {
