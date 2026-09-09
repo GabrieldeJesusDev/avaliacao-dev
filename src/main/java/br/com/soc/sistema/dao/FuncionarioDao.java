@@ -121,4 +121,21 @@ public class FuncionarioDao extends Dao {
 		}
 		
 	}
+
+	//Deleta um funcionario pelo codigo informado
+	public void deleteFuncionario(String rowid) {
+		StringBuilder query = new StringBuilder("DELETE FROM funcionario WHERE rowid = ?");
+		try(Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())){
+			
+			int i = 1;
+			ps.setString(i++, rowid);
+			ps.executeUpdate();
+			
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
 }

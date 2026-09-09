@@ -37,7 +37,7 @@ public class FuncionarioAction extends Action {
 		if (funcionarioVo.getNome() == null)
 			return INPUT;
 
-		if (funcionarioVo.getRowid() != null) {
+		if (funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
 			business.atualizarFuncionario(funcionarioVo);
 		} else {
 
@@ -53,6 +53,16 @@ public class FuncionarioAction extends Action {
 		funcionarioVo = business.buscarFuncionarioPor(funcionarioVo.getRowid());
 
 		return INPUT;
+	}
+	
+	public String excluir() {
+		
+		if(funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty())
+			return REDIRECT;
+		
+	 business.excluirFuncionario(funcionarioVo.getRowid());
+		
+		return REDIRECT;
 	}
 
 	public List<OpcoesComboBuscar> getListaOpcoesCombo() {
