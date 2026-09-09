@@ -40,7 +40,12 @@ public class FuncionarioBusiness {
 		case ID:
 			try {
 				Integer codigo = Integer.parseInt(filter.getValorBusca());
-				funcionarios.add(dao.findByCodigo(codigo));
+				FuncionarioVo funcionario = (dao.findByCodigo(codigo));
+				
+				// Aparece na lista apenas se o funcionário existir
+				if (funcionario != null) {
+					funcionarios.add(funcionario);
+				}
 			} catch (NumberFormatException e) {
 				throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 			}
@@ -58,12 +63,12 @@ public class FuncionarioBusiness {
 		try {
 			Integer cod = Integer.parseInt(codigo);
 			return dao.findByCodigo(cod);
-		} catch (NumberFormatException e) { 
+		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 		}
 	}
 
-	//Valida os dados e solicita a atualizacao do funcionario
+	// Valida os dados e solicita a atualizacao do funcionario
 	public void atualizarFuncionario(FuncionarioVo funcionarioVo) {
 		try {
 			if (funcionarioVo.getNome().isEmpty())
@@ -74,17 +79,16 @@ public class FuncionarioBusiness {
 			throw new BusinessException("Nao foi possivel realizar a atualizacao de um registro");
 		}
 	}
-	
+
 	// Valida o codigo e solicita a exclusao do funcionario
 	public void excluirFuncionario(String rowid) {
 		try {
 			if (rowid == null || rowid.isEmpty())
 				throw new IllegalArgumentException("Codigo do funcionario nao pode ser vazio");
-			 dao.deleteFuncionario(rowid);
-		}catch (Exception e) {
+			dao.deleteFuncionario(rowid);
+		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
 		}
-		
-		
+
 	}
 }

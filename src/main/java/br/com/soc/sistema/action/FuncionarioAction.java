@@ -56,7 +56,8 @@ public class FuncionarioAction extends Action {
 	}
 	
 	public String excluir() {
-		if(funcionarioVo.getRowid() == null)
+		
+		if(funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty())
 			return REDIRECT;
 		
 	 business.excluirFuncionario(funcionarioVo.getRowid());
