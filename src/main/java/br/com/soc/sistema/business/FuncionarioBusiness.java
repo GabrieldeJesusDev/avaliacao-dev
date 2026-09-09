@@ -74,4 +74,17 @@ public class FuncionarioBusiness {
 			throw new BusinessException("Nao foi possivel realizar a atualizacao de um registro");
 		}
 	}
+	
+	// Valida o codigo e solicita a exclusao do funcionario
+	public void excluirFuncionario(String rowid) {
+		try {
+			if (rowid == null || rowid.isEmpty())
+				throw new IllegalArgumentException("Codigo do funcionario nao pode ser vazio");
+			 dao.deleteFuncionario(rowid);
+		}catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
+		}
+		
+		
+	}
 }
