@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="UTF8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +58,7 @@
 										<s:text name="label.editar"/>
 									</a>
 
-									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
+									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
 										<s:text name="label.excluir"/>
 									</a>
 								</td>
@@ -105,14 +105,28 @@
 					<s:text name="label.nao"/>
 				</a>
 	        	
-				<s:a id="excluir" class="btn btn-primary" style="width: 75px;">
+				<a id="excluir" class="btn btn-primary" style="width: 75px;">
 					<s:text name="label.sim"/>
-				</s:a>						
+				</a>						
 		      </div>
 		    </div>		    
 		  </div>
 		</div>
 		
-		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-	</body>
+	<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+	// Configura o modal de exclusao com o funcionario selecionado
+	<script>
+		var modalExclusao = document.getElementById('confirmarExclusao');
+
+		modalExclusao.addEventListener('show.bs.modal', function(event) {
+			var botaoExcluir = event.relatedTarget;
+			var rowid = botaoExcluir.getAttribute('data-rowid');
+			var botaoConfirmar = document.getElementById('excluir');
+
+			botaoConfirmar.href = 'excluirFuncionarios.action?funcionarioVo.rowid=' + rowid;
+		});
+	</script>
+
+</body>
 </html>
