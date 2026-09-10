@@ -87,4 +87,60 @@ public class AgendaDao extends Dao {
 		}
 	}
 	
+	public AgendaVo findByCodigo(Integer codigo) {
+		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodo_disponivel periodo FROM agenda "
+				+ "WHERE rowid = ?");
+		
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())){
+			int i = 1;
+			
+			ps.setInt(i, codigo);
+			
+			try(ResultSet rs = ps.executeQuery()){
+				AgendaVo vo = null;
+				
+				while(rs.next()) {
+					vo = new AgendaVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setNome(rs.getString("nome"));
+					vo.setPeriodo(rs.getInt("periodo"));
+				}
+				return vo;
+			}
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<AgendaVo> findAllByNome(String nome){
+		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodo_disponivel periodo FROM agenda ")
+									.append("WHERE lower(nm_agenda) like lower(?)");
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())){
+			int i = 1;
+			
+			ps.setString(i, "%"+nome+"%");
+			
+			try(ResultSet rs = ps.executeQuery()){
+				AgendaVo vo =  null;
+				List<AgendaVo> agendas = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new AgendaVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setNome(rs.getString("nome"));
+					vo.setPeriodo(rs.getInt("periodo"));
+				}
+				
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
