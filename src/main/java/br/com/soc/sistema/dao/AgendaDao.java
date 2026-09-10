@@ -55,4 +55,36 @@ public class AgendaDao extends Dao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateAgenda(AgendaVo agendaVo) {
+		StringBuilder query = new StringBuilder("UPDATE agenda SET nm_agenda = ?, periodo_disponivel = ? WHERE rowid = ?");
+		try (Connection con = getConexao();
+			 PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i = 1;
+			
+			ps.setString(i++, agendaVo.getNome());
+			ps.setInt(i++, agendaVo.getPeriodo());
+			ps.setString(i, agendaVo.getRowid());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteAgenda(String rowid) {
+		StringBuilder query = new StringBuilder("DELETE FROM agenda WHERE rowid = ?");
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())){
+			
+			int i = 1;
+			ps.setString(i++, rowid);
+			ps.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
