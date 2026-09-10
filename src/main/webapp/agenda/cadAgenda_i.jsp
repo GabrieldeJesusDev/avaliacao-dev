@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; UTF8"
-	pageEncoding="UTF8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF8">
+<meta charset="UTF-8">
 <title><s:text name="label.titulo.pagina.cadastro" /></title>
 <link rel='stylesheet'
 	href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
@@ -57,7 +57,7 @@
 
 							<s:select cssClass="form-select" id="periodo"
 								name="agendaVo.periodo"
-								list="#{'1':'Manhã','2':'Tarde', '3':'Ambos'}" headerKey=""
+								list="#{1:'Manhã',2:'Tarde', 3:'Ambos'}" headerKey=""
 								headerValue="Escolha..." />
 
 						</div>

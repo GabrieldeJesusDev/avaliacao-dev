@@ -22,7 +22,7 @@ public class AgendaBusiness {
 
 	public void salvarAgenda(AgendaVo agendaVo) {
 		try {
-			if (agendaVo.getNome().isEmpty())
+			if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty())
 				throw new IllegalArgumentException("Agenda nao pode estar em branco");
 
 			if (agendaVo.getPeriodo() == null)
@@ -43,7 +43,7 @@ public class AgendaBusiness {
 			if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty())
 				throw new IllegalArgumentException("Codigo da agenda nao informado");
 
-			if (agendaVo.getNome().isEmpty())
+			if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty())
 				throw new IllegalArgumentException("Nao pode estar em branco");
 
 			if (agendaVo.getPeriodo() == null || agendaVo.getPeriodo() < 1 || agendaVo.getPeriodo() > 3)
