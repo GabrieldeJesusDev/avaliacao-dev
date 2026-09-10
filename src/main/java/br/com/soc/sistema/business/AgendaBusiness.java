@@ -16,7 +16,7 @@ public class AgendaBusiness {
 		this.dao = new AgendaDao();
 	}
 
-	public List<AgendaVo> tazerTodasAsAgendas() {
+	public List<AgendaVo> trazerTodasAsAgendas() {
 		return dao.findAllAgendas();
 	}
 
