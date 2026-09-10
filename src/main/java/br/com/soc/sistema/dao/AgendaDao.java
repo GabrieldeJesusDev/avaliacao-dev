@@ -134,13 +134,16 @@ public class AgendaDao extends Dao {
 					vo.setRowid(rs.getString("id"));
 					vo.setNome(rs.getString("nome"));
 					vo.setPeriodo(rs.getInt("periodo"));
+					
+					agendas.add(vo);
 				}
-				
+				return agendas;
 			}
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return Collections.emptyList();
 	}
 	
 }
