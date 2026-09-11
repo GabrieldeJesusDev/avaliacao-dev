@@ -95,18 +95,19 @@ public class AgendaDao extends Dao {
 				PreparedStatement ps = con.prepareStatement(query.toString())){
 			int i = 1;
 			
-			ps.setInt(i, codigo);
+			ps.setInt(i++, codigo);
 			
-			try(ResultSet rs = ps.executeQuery()){
-				AgendaVo vo = null;
-				
-				while(rs.next()) {
+			try(ResultSet rs = ps.executeQuery()){				
+				if(rs.next()) {
+					AgendaVo vo = new AgendaVo();
 					vo = new AgendaVo();
 					vo.setRowid(rs.getString("id"));
 					vo.setNome(rs.getString("nome"));
 					vo.setPeriodo(rs.getInt("periodo"));
+					
+					return vo;
+
 				}
-				return vo;
 			}
 			
 			
