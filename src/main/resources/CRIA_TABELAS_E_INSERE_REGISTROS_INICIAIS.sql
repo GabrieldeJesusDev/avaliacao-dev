@@ -2,3 +2,5 @@ CREATE TABLE funcionario (rowid bigint auto_increment, nm_funcionario VARCHAR(25
 INSERT INTO funcionario (nm_funcionario) VALUES ('João'), ('Maria'), ('José'), ('Joana');
 
 CREATE TABLE agenda (rowid bigint auto_increment, nm_agenda VARCHAR(255), periodo_disponivel INTEGER);
+
+CREATE TABLE compromisso(rowid bigint auto_increment, cd_funcionario INTEGER, cd_agenda INTEGER, data date, hora TIME);
