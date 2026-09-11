@@ -14,7 +14,7 @@ public class CompromissoDao extends Dao {
 
 	public List<CompromissoVo> findAllCompromissos() {
 		StringBuilder query = new StringBuilder(
-				"SELECT rowid id, cd_funcionario cdFuncionario, cd_agenda cdAgenda, data, hora FROM compromissos");
+				"SELECT rowid id, cd_funcionario cdFuncionario, cd_agenda cdAgenda, data, hora FROM compromisso");
 
 		try (Connection con = getConexao();
 				PreparedStatement ps = con.prepareStatement(query.toString());
