@@ -38,7 +38,7 @@ public class CompromissoBusiness {
 			dao.insertCompromisso(compromissoVo);
 
 		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a inclusao de um registro");
+			throw new BusinessException(e.getMessage());
 		}
 	}
 
@@ -63,7 +63,7 @@ public class CompromissoBusiness {
 			dao.updateCompromisso(compromissoVo);
 
 		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a atualizacao do compromisso");
+			throw new BusinessException(e.getMessage());
 		}
 	}
 
@@ -133,7 +133,7 @@ public class CompromissoBusiness {
 			}
 			
 		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel validar o periodo da agenda");
+			throw new BusinessException(e.getMessage());
 		}
 
 	}

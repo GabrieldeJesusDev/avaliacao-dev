@@ -29,8 +29,11 @@
 				</div>
 
 				<div class="card-body">
+
+					<s:actionerror cssClass="alert alert-danger" />
+
 					<div class="row align-items-center">
-						<label for="id" class="col-sm-1 col-form-label text-center">
+						<label for="id" class="col-sm-2 col-form-label text-center">
 							Código: </label>
 
 						<div class="col-sm-2">
@@ -41,7 +44,7 @@
 
 					<div class="row align-items-center mt-3">
 						<label for="funcionario"
-							class="col-sm-1 col-form-label text-center"> Funcionario:
+							class="col-sm-2 col-form-label text-center"> Funcionario:
 						</label>
 
 						<div class="col-sm-5">
@@ -53,7 +56,7 @@
 					</div>
 
 					<div class="row align-items-center mt-3">
-						<label for="agenda" class="col-sm-1 col-form-label text-center">
+						<label for="agenda" class="col-sm-2 col-form-label text-center">
 							Agenda: </label>
 
 						<div class="col-sm-5">
@@ -66,29 +69,29 @@
 					</div>
 
 					<div class="row align-items-center mt-3">
-						<label for="data" class="col-sm-1 col-form-label text-center">
+						<label for="data" class="col-sm-2 col-form-label text-center">
 							Data: </label>
 
 						<div class="col-sm-5">
 
-							<s:textfield cssClass="form-control" id="data"
-								name="data" type="date" />
-								
+							<s:textfield cssClass="form-control" id="data" name="data"
+								type="date" />
+
 						</div>
 					</div>
-					
+
 					<div class="row align-items-center mt-3">
-						<label for="hora" class="col-sm-1 col-form-label text-center">
+						<label for="hora" class="col-sm-2 col-form-label text-center">
 							Hora: </label>
 
 						<div class="col-sm-5">
 
-							<s:textfield cssClass="form-control" id="hora"
-								name="hora" type="time" />
-								
+							<s:textfield cssClass="form-control" id="hora" name="hora"
+								type="time" />
+
 						</div>
 					</div>
-					
+
 
 
 				</div>

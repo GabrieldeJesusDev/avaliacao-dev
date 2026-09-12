@@ -8,6 +8,7 @@ import java.util.List;
 import br.com.soc.sistema.business.AgendaBusiness;
 import br.com.soc.sistema.business.CompromissoBusiness;
 import br.com.soc.sistema.business.FuncionarioBusiness;
+import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.infra.Action;
 import br.com.soc.sistema.vo.AgendaVo;
 import br.com.soc.sistema.vo.CompromissoVo;
@@ -27,12 +28,6 @@ public class CompromissoAction extends Action {
 
 	public String todos() {
 		compromissos.addAll(business.trazerTodosOsCompromissos());
-		
-		System.out.println("Quantidade de Compromissos: " + compromissos.size());
-		
-		for(CompromissoVo c : compromissos) {
-			System.out.println(c);
-		}
 
 		return SUCCESS;
 	}
@@ -44,14 +39,26 @@ public class CompromissoAction extends Action {
 
 			return INPUT;
 		}
-		
+
+		if (data == null || data.isEmpty() || hora == null || hora.isEmpty()) {
+			carregarCombos();
+			return INPUT;
+		}
+
 		compromissoVo.setData(LocalDate.parse(data));
 		compromissoVo.setHora(LocalTime.parse(hora));
+		try {
+			if (compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
+				business.atualizarCompromisso(compromissoVo);
+			} else {
+				business.salvarCompromisso(compromissoVo);
+			}
 
-		if (compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
-			business.atualizarCompromisso(compromissoVo);
-		} else {
-			business.salvarCompromisso(compromissoVo);
+		} catch (BusinessException e) {
+			addActionError(e.getMessage());
+			carregarCombos();
+
+			return INPUT;
 		}
 		return REDIRECT;
 	}
@@ -62,8 +69,15 @@ public class CompromissoAction extends Action {
 
 		compromissoVo = business.buscarCompromissoPor(compromissoVo.getRowid());
 
-		carregarCombos();
+		if(compromissoVo == null) {
+			return REDIRECT;
+		}
 		
+		data = compromissoVo.getData().toString();
+		hora = compromissoVo.getHora().toString();
+
+		carregarCombos();
+
 		return INPUT;
 	}
 
@@ -128,5 +142,5 @@ public class CompromissoAction extends Action {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	
+
 }
