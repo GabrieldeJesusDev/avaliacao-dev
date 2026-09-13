@@ -25,20 +25,18 @@
 					<div class="row mb-3">
 						<div class="col-md-5">
 							<label>Data Inicial:</label>
-
 							<s:textfield name="dataInicial" type="date"
 								cssClass="form-control" />
 						</div>
-
 						<div class="col-md-5">
 							<label>Data Final:</label>
-
 							<s:textfield name="dataFinal" type="date" cssClass="form-control" />
 						</div>
-
-						<div class="col-md-2 d-flex align-items-end">
+						<div class="col-md-2 d-flex flex-column justify-content-end">
 							<button type="submit" class="btn btn-primary w-100">
 								Gerar</button>
+							<button type="submit" formaction="excelRelatorios.action"
+								class="btn btn-success w-100 mt-2">Exportar Excel</button>
 						</div>
 					</div>
 				</s:form>

@@ -42,6 +42,12 @@
 			method="{1}">
 			<result name="success">/relatorio/relatorioCompromisso.jsp</result>
 			<result name="input">/relatorio/relatorioCompromisso.jsp</result>
+
+			<result name="excel" type="stream">
+				<param name="contentType">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+				<param name="inputName">arquivoExcel</param>
+				<param name="contentDisposition">attachment;filename="relatorio_compromissos.xlsx"</param>
+			</result>
 		</action>
 	</package>
 
