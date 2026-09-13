@@ -157,7 +157,7 @@ public class CompromissoDao extends Dao {
 		return false;
 	}
 
-	public List<RelatorioCompromissoVo> buscarRelatorio(LocalDate dataIncial, LocalDate dataFinal){
+	public List<RelatorioCompromissoVo> buscarRelatorio(LocalDate dataInicial, LocalDate dataFinal){
 		StringBuilder query = new StringBuilder("SELECT f.rowid AS codigoFuncionario, f.nm_funcionario AS nomeFuncionario, a.rowid AS codigoAgenda, a.nm_agenda AS nomeAgenda, c.data, c.hora FROM compromisso c " +
 			    "INNER JOIN funcionario f ON c.cd_funcionario = f.rowid " +
 			    "INNER JOIN agenda a ON c.cd_agenda = a.rowid " +
@@ -169,7 +169,7 @@ public class CompromissoDao extends Dao {
 			
 			int i = 1;
 			
-			ps.setDate(i++, java.sql.Date.valueOf(dataIncial));
+			ps.setDate(i++, java.sql.Date.valueOf(dataInicial));
 			ps.setDate(i++, java.sql.Date.valueOf(dataFinal));
 			
 			try(ResultSet rs = ps.executeQuery()){

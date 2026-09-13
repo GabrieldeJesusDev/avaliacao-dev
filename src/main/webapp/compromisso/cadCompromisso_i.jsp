@@ -106,10 +106,13 @@
 
 				<div class="card-footer">
 					<div class="form-row">
-						<button class="btn btn-primary col-sm-4 offset-sm-1">Salvar</button>
+						<button class="btn btn-primary col-sm-4 offset-sm-1">
+							<s:text name="label.salvar" />
+						</button>
 						<button type="reset"
-							class="btn btn-secondary col-sm-4 offset-sm-2">Limpar
-							Formulario</button>
+							class="btn btn-secondary col-sm-4 offset-sm-2">
+							<s:text name="label.limpar.formulario" />
+						</button>
 					</div>
 				</div>
 			</div>

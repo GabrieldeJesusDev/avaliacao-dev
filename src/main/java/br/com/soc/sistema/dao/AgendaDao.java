@@ -100,7 +100,6 @@ public class AgendaDao extends Dao {
 			try(ResultSet rs = ps.executeQuery()){				
 				if(rs.next()) {
 					AgendaVo vo = new AgendaVo();
-					vo = new AgendaVo();
 					vo.setRowid(rs.getString("id"));
 					vo.setNome(rs.getString("nome"));
 					vo.setPeriodo(rs.getInt("periodo"));

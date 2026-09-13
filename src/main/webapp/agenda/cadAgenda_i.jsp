@@ -67,7 +67,7 @@
 							<s:text name="label.escolha" var="escolha" />
 
 							<s:select cssClass="form-select" id="periodo"
-								name="agendaVo.periodo" list="#{1:'manha',2:'tarde', 3:'ambos'}"
+								name="agendaVo.periodo" list="#{1:#manha, 2:#tarde, 3:#ambos}"
 								headerKey="" headerValue="%{#escolha}" />
 
 						</div>
