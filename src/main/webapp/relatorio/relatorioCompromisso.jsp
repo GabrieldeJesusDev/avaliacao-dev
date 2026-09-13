@@ -85,12 +85,12 @@
 
 							<s:iterator value="relatorios">
 								<tr>
-									<td>${codigoFuncionario}</td>
-									<td>${nomeFuncionario}</td>
-									<td>${codigoAgenda}</td>
-									<td>${nomeAgenda}</td>
-									<td>${data}</td>
-									<td>${hora}</td>
+									<td><s:property value="codigoFuncionario" /></td>
+									<td><s:property value="nomeFuncionario" escapeHtml="true" /></td>
+									<td><s:property value="codigoAgenda" /></td>
+									<td><s:property value="nomeAgenda" escapeHtml="true" /></td>
+									<td><s:property value="data" escapeHtml="true" /></td>
+									<td><s:property value="hora" escapeHtml="true" /></td>
 								</tr>
 							</s:iterator>
 						</tbody>

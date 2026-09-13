@@ -73,8 +73,8 @@
 				<tbody>
 					<s:iterator value="agendas">
 						<tr>
-							<td>${rowid}</td>
-							<td>${nome}</td>
+							<td><s:property value="rowid" />}</td>
+							<td><s:property value="nome" escapeHtml="true" /></td>
 
 							<td><s:if test="periodo == 1">
 									<s:text name="label.periodo.manha" />

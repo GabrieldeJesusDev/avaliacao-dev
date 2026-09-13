@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.soc.sistema.business.FuncionarioBusiness;
+import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.filter.FuncionarioFilter;
 import br.com.soc.sistema.infra.Action;
 import br.com.soc.sistema.infra.OpcoesComboBuscar;
@@ -24,24 +25,34 @@ public class FuncionarioAction extends Action {
 	}
 
 	public String filtrar() {
+
 		if (filtrar.isNullOpcoesCombo())
 			return REDIRECT;
 
-		funcionarios = business.filtrarFuncionarios(filtrar);
+		try {
+			funcionarios = business.filtrarFuncionarios(filtrar);
 
+		} catch (BusinessException e) {
+			addActionError(e.getMessage());
+			return SUCCESS;
+		}
 		return SUCCESS;
 	}
 
-	//Direciona o fluxo para inclusao ou atualizacao do funcionario
+	// Direciona o fluxo para inclusao ou atualizacao do funcionario
 	public String novo() {
 		if (funcionarioVo.getNome() == null)
 			return INPUT;
+		try {
+			if (funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
+				business.atualizarFuncionario(funcionarioVo);
+			} else {
+				business.salvarFuncionario(funcionarioVo);
+			}
 
-		if (funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
-			business.atualizarFuncionario(funcionarioVo);
-		} else {
-
-			business.salvarFuncionario(funcionarioVo);
+		} catch (BusinessException e) {
+			addActionError(e.getMessage());
+			return INPUT;
 		}
 		return REDIRECT;
 	}
@@ -54,14 +65,14 @@ public class FuncionarioAction extends Action {
 
 		return INPUT;
 	}
-	
+
 	public String excluir() {
-		
-		if(funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty())
+
+		if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty())
 			return REDIRECT;
-		
-	 business.excluirFuncionario(funcionarioVo.getRowid());
-		
+
+		business.excluirFuncionario(funcionarioVo.getRowid());
+
 		return REDIRECT;
 	}
 

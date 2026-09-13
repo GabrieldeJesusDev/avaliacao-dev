@@ -54,12 +54,11 @@
 				<tbody>
 					<s:iterator value="compromissos">
 						<tr>
-							<td>${rowid}</td>
-							<td>${cdFuncionario}</td>
-							<td>${cdAgenda}</td>
-							<td>${data}</td>
-							<td>${hora}</td>
-
+							<td><s:property value="rowid" /></td>
+							<td><s:property value="cdFuncionario" /></td>
+							<td><s:property value="cdAgenda" /></td>
+							<td><s:property value="data" escapeHtml="true" /></td>
+							<td><s:property value="hora" escapeHtml="true" /></td>
 							<td class="text-end"><s:url action="editarCompromissos"
 									var="editar">
 									<s:param name="compromissoVo.rowid" value="rowid"></s:param>
