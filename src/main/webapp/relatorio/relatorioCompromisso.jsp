@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF8">
-<title>Relatório de Compromissos</title>
+<title><s:text name="label.titulo.pagina" /></title>
 
 <link rel="stylesheet"
 	href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
@@ -16,7 +16,9 @@
 	<div class="container mt-5">
 		<div class="card">
 			<div class="card-header">
-				<h4>Relatório de Compromissos</h4>
+				<h4>
+					<s:text name="label.titulo.pagina" />
+				</h4>
 			</div>
 
 			<div class="card-body">
@@ -24,19 +26,22 @@
 				<s:form action="/gerarRelatorios.action">
 					<div class="row mb-3">
 						<div class="col-md-5">
-							<label>Data Inicial:</label>
+							<label><s:text name="label.data.inicial" />:</label>
 							<s:textfield name="dataInicial" type="date"
 								cssClass="form-control" />
 						</div>
 						<div class="col-md-5">
-							<label>Data Final:</label>
+							<label><s:text name="label.data.final" /> :</label>
 							<s:textfield name="dataFinal" type="date" cssClass="form-control" />
 						</div>
 						<div class="col-md-2 d-flex flex-column justify-content-end">
 							<button type="submit" class="btn btn-primary w-100">
-								Gerar</button>
+								<s:text name="label.gerar" />
+							</button>
 							<button type="submit" formaction="excelRelatorios.action"
-								class="btn btn-success w-100 mt-2">Exportar Excel</button>
+								class="btn btn-success w-100 mt-2">
+								<s:text name="label.exportar.excel" />
+							</button>
 						</div>
 					</div>
 				</s:form>
@@ -45,12 +50,12 @@
 					<table class="table table-light table-striped align-middle">
 						<thead>
 							<tr>
-								<th>Código Funcionário</th>
-								<th>Nome Funcionário</th>
-								<th>Código Agenda</th>
-								<th>Nome Agenda</th>
-								<th>Data</th>
-								<th>Hora</th>
+								<th><s:text name="label.codigo.funcionario" /></th>
+								<th><s:text name="label.nome.funcionario" /></th>
+								<th><s:text name="label.codigo.agenda" /></th>
+								<th><s:text name="label.nome.agenda" /></th>
+								<th><s:text name="label.data" /></th>
+								<th><s:text name="label.hora" /></th>
 							</tr>
 						</thead>
 						<tbody>

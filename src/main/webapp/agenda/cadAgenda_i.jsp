@@ -19,11 +19,14 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<s:url action="todosAgendas" var="todos" />
-							<a href="${todos}" class="btn btn-success">Agendas</a>
+							<a href="${todos}" class="btn btn-success"><s:text
+									name="label.agendas" /></a>
 						</div>
 
 						<div class="col-sm">
-							<h5 class="card-title">Nova Agenda</h5>
+							<h5 class="card-title">
+								<s:text name="label.nova.agenda" />
+							</h5>
 						</div>
 					</div>
 				</div>
@@ -31,7 +34,8 @@
 				<div class="card-body">
 					<div class="row align-items-center">
 						<label for="id" class="col-sm-1 col-form-label text-center">
-							Código: </label>
+							<s:text name="label.codigo" />:
+						</label>
 
 						<div class="col-sm-2">
 							<s:textfield cssClass="form-control" id="id"
@@ -41,7 +45,8 @@
 
 					<div class="row align-items-center mt-3">
 						<label for="nome" class="col-sm-1 col-form-label text-center">
-							Nome: </label>
+							<s:text name="label.nome" />:
+						</label>
 
 						<div class="col-sm-5">
 							<s:textfield cssClass="form-control" id="nome"
@@ -51,14 +56,19 @@
 
 					<div class="row align-items-center mt-3">
 						<label for="periodo" class="col-sm-1 col-form-label text-center">
-							Periodo: </label>
+							<s:text name="label.periodo" />:
+						</label>
 
 						<div class="col-sm-5">
 
+							<s:text name="label.periodo.manha" var="manha" />
+							<s:text name="label.periodo.tarde" var="tarde" />
+							<s:text name="label.periodo.ambos" var="ambos" />
+							<s:text name="label.escolha" var="escolha" />
+
 							<s:select cssClass="form-select" id="periodo"
-								name="agendaVo.periodo"
-								list="#{1:'Manhã',2:'Tarde', 3:'Ambos'}" headerKey=""
-								headerValue="Escolha..." />
+								name="agendaVo.periodo" list="#{1:'manha',2:'tarde', 3:'ambos'}"
+								headerKey="" headerValue="%{#escolha}" />
 
 						</div>
 					</div>
@@ -67,10 +77,13 @@
 
 				<div class="card-footer">
 					<div class="form-row">
-						<button class="btn btn-primary col-sm-4 offset-sm-1">Salvar</button>
+						<button class="btn btn-primary col-sm-4 offset-sm-1">
+							<s:text name="label.salvar" />
+						</button>
 						<button type="reset"
-							class="btn btn-secondary col-sm-4 offset-sm-2">Limpar
-							Formulario</button>
+							class="btn btn-secondary col-sm-4 offset-sm-2">
+							<s:text name="label.limpar.formulario" />
+						</button>
 					</div>
 				</div>
 			</div>

@@ -19,11 +19,14 @@
 					<div class="row">
 						<div class="col-sm-5">
 							<s:url action="todosCompromissos" var="todos" />
-							<a href="${todos}" class="btn btn-success">Compromissos</a>
+							<a href="${todos}" class="btn btn-success"><s:text
+									name="label.compromissos" /></a>
 						</div>
 
 						<div class="col-sm">
-							<h5 class="card-title">Novo Compromisso</h5>
+							<h5 class="card-title">
+								<s:text name="label.novo.compromisso" />
+							</h5>
 						</div>
 					</div>
 				</div>
@@ -34,7 +37,8 @@
 
 					<div class="row align-items-center">
 						<label for="id" class="col-sm-2 col-form-label text-center">
-							Código: </label>
+							<s:text name="label.codigo" />:
+						</label>
 
 						<div class="col-sm-2">
 							<s:textfield cssClass="form-control" id="id"
@@ -44,33 +48,36 @@
 
 					<div class="row align-items-center mt-3">
 						<label for="funcionario"
-							class="col-sm-2 col-form-label text-center"> Funcionario:
+							class="col-sm-2 col-form-label text-center"> <s:text
+								name="label.funcionario" />:
 						</label>
-
+						<s:text name="label.escolha" var="escolha" />
 						<div class="col-sm-5">
 							<s:select cssClass="form-select" id="funcionario"
 								name="compromissoVo.cdFuncionario" list="funcionarios"
 								listKey="rowid" listValue="nome" headerKey=""
-								headerValue="Escolha..." />
+								headerValue="%{#escolha}" />
 						</div>
 					</div>
 
 					<div class="row align-items-center mt-3">
 						<label for="agenda" class="col-sm-2 col-form-label text-center">
-							Agenda: </label>
+							<s:text name="label.agenda" />:
+						</label>
 
 						<div class="col-sm-5">
 
 							<s:select cssClass="form-select" id="agenda"
 								name="compromissoVo.cdAgenda" list="agendas" listKey="rowid"
-								listValue="nome" headerKey="" headerValue="Escolha..." />
+								listValue="nome" headerKey="" headerValue="%{#escolha}" />
 
 						</div>
 					</div>
 
 					<div class="row align-items-center mt-3">
 						<label for="data" class="col-sm-2 col-form-label text-center">
-							Data: </label>
+							<s:text name="label.data" />:
+						</label>
 
 						<div class="col-sm-5">
 
@@ -82,7 +89,8 @@
 
 					<div class="row align-items-center mt-3">
 						<label for="hora" class="col-sm-2 col-form-label text-center">
-							Hora: </label>
+							<s:text name="label.hora" />:
+						</label>
 
 						<div class="col-sm-5">
 

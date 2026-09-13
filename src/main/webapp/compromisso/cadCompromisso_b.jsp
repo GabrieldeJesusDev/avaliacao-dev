@@ -12,8 +12,7 @@
 <body class="bg-secondary">
 	<div class="container">
 		<div class="row mt-5 mb-2">
-			<div class="col-sm p-0">
-			</div>
+			<div class="col-sm p-0"></div>
 		</div>
 
 		<div class="row">
@@ -21,10 +20,10 @@
 				<thead>
 					<tr>
 						<th><s:text name="label.id" /></th>
-						<th>Funcionário</th>
-						<th>Agenda</th>
-						<th>Data</th>
-						<th>Hora</th>												
+						<th><s:text name="label.funcionario" /></th>
+						<th><s:text name="label.agenda" /></th>
+						<th><s:text name="label.data" /></th>
+						<th><s:text name="label.hora" /></th>
 						<th class="text-end mt-5"><s:text name="label.acao" /></th>
 					</tr>
 				</thead>
@@ -53,8 +52,8 @@
 
 				<tfoot class="table-secondary">
 					<tr>
-						<td colspan="6"><s:url action="novoCompromissos" var="novo" /> <a
-							href="${novo}" class="btn btn-success"> <s:text
+						<td colspan="6"><s:url action="novoCompromissos" var="novo" />
+							<a href="${novo}" class="btn btn-success"> <s:text
 									name="label.novo" />
 						</a></td>
 					</tr>
@@ -101,14 +100,18 @@
 
 		var modalExclusao = document.getElementById('confirmarExclusao');
 
-		modalExclusao.addEventListener('show.bs.modal', function(event) {
-			var botaoExcluir = event.relatedTarget;
-			var rowid = botaoExcluir.getAttribute('data-rowid');
-			var botaoConfirmar = document.getElementById('excluir');
+		modalExclusao
+				.addEventListener(
+						'show.bs.modal',
+						function(event) {
+							var botaoExcluir = event.relatedTarget;
+							var rowid = botaoExcluir.getAttribute('data-rowid');
+							var botaoConfirmar = document
+									.getElementById('excluir');
 
-			botaoConfirmar.href = 'excluirCompromissos.action?compromissoVo.rowid='
-					+ rowid;
-		});
+							botaoConfirmar.href = 'excluirCompromissos.action?compromissoVo.rowid='
+									+ rowid;
+						});
 	</script>
 
 </body>

@@ -18,8 +18,9 @@
 						<span class="input-group-text"> <strong><s:text
 									name="label.buscar.por" /></strong>
 						</span>
+						<s:text name="label.escolha" var="labelEscolha" />
 						<s:select cssClass="form-select" name="filtrar.opcoesCombo"
-							list="listaOpcoesCombo" headerKey="" headerValue="Escolha..."
+							list="listaOpcoesCombo" headerKey="" headerValue="%{#labelEscolha}"
 							listKey="%{codigo}" listValueKey="%{descricao}"
 							value="filtrar.opcoesCombo.codigo" />
 
@@ -35,13 +36,13 @@
 
 		<div class="row">
 			<s:actionerror cssClass="alert alert-danger" />
-			
+
 			<table class="table table-light table-striped align-middle">
 				<thead>
 					<tr>
 						<th><s:text name="label.id" /></th>
 						<th><s:text name="label.nome" /></th>
-						<th>Periodo</th>
+						<th><s:text name="label.periodo" /></th>
 						<th class="text-end mt-5"><s:text name="label.acao" /></th>
 					</tr>
 				</thead>
@@ -53,11 +54,11 @@
 							<td>${nome}</td>
 
 							<td><s:if test="periodo == 1">
-									Manhã
+									<s:text name="label.periodo.manha" />
 								</s:if> <s:elseif test="periodo == 2">
-									Tarde								
+									<s:text name="label.periodo.tarde" />								
 								</s:elseif> <s:else>
-									Ambos
+									<s:text name="label.periodo.ambos" />
 								</s:else></td>
 							<td class="text-end"><s:url action="editarAgendas"
 									var="editar">
