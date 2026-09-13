@@ -17,6 +17,10 @@ public class RelatorioCompromissoAction extends Action {
 	private String dataInicial;
 	private String dataFinal;
 
+	public String abrir() {
+		return INPUT;
+	}
+	
 	public String gerar() {
 
 		if (dataInicial == null || dataInicial.isEmpty() || dataFinal == null || dataFinal.isEmpty()) {
