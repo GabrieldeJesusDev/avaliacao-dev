@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,10 @@ public class RelatorioCompromissoAction extends Action {
 
 			relatorios = business.gerarRelatorio(inicio, fim);
 
+		}catch (DateTimeParseException e) {
+			addActionError("Data inicial ou final invalida");
+			return INPUT;
+			
 		} catch (BusinessException e) {
 
 			addActionError(e.getMessage());
@@ -102,6 +107,11 @@ public class RelatorioCompromissoAction extends Action {
 			
 			workbook.close();
 
+			
+		}catch(DateTimeParseException e) {
+			addActionError("Data inicial ou final invalida");
+			return INPUT;
+			
 		} catch (BusinessException e) {
 
 			addActionError(e.getMessage());

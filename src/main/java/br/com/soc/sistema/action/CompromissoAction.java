@@ -2,6 +2,7 @@ package br.com.soc.sistema.action;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,18 +42,27 @@ public class CompromissoAction extends Action {
 		}
 
 		if (data == null || data.isEmpty() || hora == null || hora.isEmpty()) {
+			addActionError("data e hora devem ser informadas");
 			carregarCombos();
 			return INPUT;
 		}
 
-		compromissoVo.setData(LocalDate.parse(data));
-		compromissoVo.setHora(LocalTime.parse(hora));
+
 		try {
+			compromissoVo.setData(LocalDate.parse(data));
+			compromissoVo.setHora(LocalTime.parse(hora));
+			
 			if (compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
 				business.atualizarCompromisso(compromissoVo);
 			} else {
 				business.salvarCompromisso(compromissoVo);
 			}
+			
+		}catch(DateTimeParseException e) {
+			addActionError("Data ou hora invalida");
+			carregarCombos();
+			
+			return INPUT;
 
 		} catch (BusinessException e) {
 			addActionError(e.getMessage());
