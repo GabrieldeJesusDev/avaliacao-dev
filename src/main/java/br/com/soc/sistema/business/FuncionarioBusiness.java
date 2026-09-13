@@ -3,6 +3,7 @@ package br.com.soc.sistema.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.soc.sistema.dao.CompromissoDao;
 import br.com.soc.sistema.dao.FuncionarioDao;
 import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.filter.FuncionarioFilter;
@@ -85,6 +86,10 @@ public class FuncionarioBusiness {
 		try {
 			if (rowid == null || rowid.isEmpty())
 				throw new IllegalArgumentException("Codigo do funcionario nao pode ser vazio");
+			
+			CompromissoDao compromissoDao = new CompromissoDao();
+			compromissoDao.deleteByFuncionario(rowid);	  
+			
 			dao.deleteFuncionario(rowid);
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");

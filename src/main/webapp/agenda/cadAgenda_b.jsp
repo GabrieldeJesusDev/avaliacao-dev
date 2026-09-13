@@ -34,6 +34,8 @@
 		</div>
 
 		<div class="row">
+			<s:actionerror cssClass="alert alert-danger" />
+			
 			<table class="table table-light table-striped align-middle">
 				<thead>
 					<tr>
@@ -50,14 +52,11 @@
 							<td>${rowid}</td>
 							<td>${nome}</td>
 
-							<td>
-							<s:if test="periodo == 1">
+							<td><s:if test="periodo == 1">
 									Manhã
-								</s:if>
-								<s:elseif test="periodo == 2">
+								</s:if> <s:elseif test="periodo == 2">
 									Tarde								
-								</s:elseif> 
-								<s:else>
+								</s:elseif> <s:else>
 									Ambos
 								</s:else></td>
 							<td class="text-end"><s:url action="editarAgendas"

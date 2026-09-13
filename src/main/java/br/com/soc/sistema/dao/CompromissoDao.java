@@ -120,4 +120,41 @@ public class CompromissoDao extends Dao {
 		}
 		return null;
 	}
+	
+	public void deleteByFuncionario(String codFuncionario) {
+		StringBuilder query = new StringBuilder("DELETE FROM compromisso WHERE cd_funcionario = ?");
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())){
+			
+			int i = 1;
+			ps.setString(i++, codFuncionario);
+			ps.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public boolean existeCompromissoPorAgenda(String cdAgenda) {
+		StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM compromisso WHERE cd_agenda = ?");
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())){
+			
+			int i = 1;
+
+			ps.setString(i++, cdAgenda);
+			
+			try(ResultSet rs = ps.executeQuery()){
+				if(rs.next()) {
+					return rs.getInt(1) > 0;
+				}
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

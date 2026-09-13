@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.soc.sistema.dao.AgendaDao;
+import br.com.soc.sistema.dao.CompromissoDao;
 import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.filter.AgendaFilter;
 import br.com.soc.sistema.vo.AgendaVo;
@@ -94,9 +95,18 @@ public class AgendaBusiness {
 		try {
 			if (rowid == null || rowid.isEmpty())
 				throw new IllegalArgumentException("Codigo da Agenda nao informado");
+
+			CompromissoDao compromissoDao = new CompromissoDao();
+
+			if (compromissoDao.existeCompromissoPorAgenda(rowid)) {
+				throw new IllegalArgumentException("Nao e possivel excluir uma agenda com compromissos cadastrados");
+			}
+
 			dao.deleteAgenda(rowid);
 		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a exclusao da agenda");
+			
+			
+			throw new BusinessException(e.getMessage());
 		}
 	}
 

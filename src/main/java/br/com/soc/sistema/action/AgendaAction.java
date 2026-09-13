@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.soc.sistema.business.AgendaBusiness;
+import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.filter.AgendaFilter;
 import br.com.soc.sistema.infra.Action;
 import br.com.soc.sistema.infra.OpcoesComboBuscar;
@@ -58,7 +59,16 @@ public class AgendaAction extends Action {
 		if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty())
 			return REDIRECT;
 
-		business.excluirAgenda(agendaVo.getRowid());
+		try {
+			
+			business.excluirAgenda(agendaVo.getRowid());
+
+		}catch (BusinessException e) {
+			addActionError(e.getMessage());
+			agendas.addAll(business.trazerTodasAsAgendas());
+			
+			return SUCCESS;
+		}
 
 		return REDIRECT;
 	}
