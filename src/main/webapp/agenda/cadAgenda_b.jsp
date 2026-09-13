@@ -11,6 +11,29 @@
 </head>
 <body class="bg-secondary">
 	<div class="container">
+		<div class="row mt-4 mb-3">
+			<div class="col-sm">
+				<div class="btn-group w-100" role="group">
+
+					<s:url action="todosFuncionarios" var="urlFuncionarios" />
+					<a href="${urlFuncionarios}" class="btn btn-dark"> <s:text
+							name="label.funcionarios" />
+					</a>
+					<s:url action="todosAgendas" var="urlAgendas" />
+					<a href="${urlAgendas}" class="btn btn-dark"> <s:text
+							name="label.agendas" />
+					</a>
+					<s:url action="todosCompromissos" var="urlCompromissos" />
+					<a href="${urlCompromissos}" class="btn btn-dark"> <s:text
+							name="label.compromissos" />
+					</a>
+					<s:url action="abrirRelatorios" var="urlRelatorios" />
+					<a href="${urlRelatorios}" class="btn btn-dark"> <s:text
+							name="label.relatorio.compromissos" />
+					</a>
+				</div>
+			</div>
+		</div>
 		<div class="row mt-5 mb-2">
 			<div class="col-sm p-0">
 				<s:form action="/filtrarAgendas.action">
@@ -20,9 +43,9 @@
 						</span>
 						<s:text name="label.escolha" var="labelEscolha" />
 						<s:select cssClass="form-select" name="filtrar.opcoesCombo"
-							list="listaOpcoesCombo" headerKey="" headerValue="%{#labelEscolha}"
-							listKey="%{codigo}" listValueKey="%{descricao}"
-							value="filtrar.opcoesCombo.codigo" />
+							list="listaOpcoesCombo" headerKey=""
+							headerValue="%{#labelEscolha}" listKey="%{codigo}"
+							listValueKey="%{descricao}" value="filtrar.opcoesCombo.codigo" />
 
 						<s:textfield cssClass="form-control" id="nome"
 							name="filtrar.valorBusca" />
@@ -56,7 +79,7 @@
 							<td><s:if test="periodo == 1">
 									<s:text name="label.periodo.manha" />
 								</s:if> <s:elseif test="periodo == 2">
-									<s:text name="label.periodo.tarde" />								
+									<s:text name="label.periodo.tarde" />
 								</s:elseif> <s:else>
 									<s:text name="label.periodo.ambos" />
 								</s:else></td>

@@ -11,6 +11,29 @@
 </head>
 <body class="bg-secondary">
 	<div class="container">
+		<div class="row mt-4 mb-3">
+			<div class="col-sm">
+				<div class="btn-group w-100" role="group">
+
+					<s:url action="todosFuncionarios" var="urlFuncionarios" />
+					<a href="${urlFuncionarios}" class="btn btn-dark"> <s:text
+							name="label.funcionarios" />
+					</a>
+					<s:url action="todosAgendas" var="urlAgendas" />
+					<a href="${urlAgendas}" class="btn btn-dark"> <s:text
+							name="label.agendas" />
+					</a>
+					<s:url action="todosCompromissos" var="urlCompromissos" />
+					<a href="${urlCompromissos}" class="btn btn-dark"> <s:text
+							name="label.compromissos" />
+					</a>
+					<s:url action="abrirRelatorios" var="urlRelatorios" />
+					<a href="${urlRelatorios}" class="btn btn-dark"> <s:text
+							name="label.relatorio.compromissos" />
+					</a>
+				</div>
+			</div>
+		</div>
 		<div class="row mt-5 mb-2">
 			<div class="col-sm p-0"></div>
 		</div>
