@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import br.com.soc.sistema.vo.CompromissoVo;
+import br.com.soc.sistema.vo.RelatorioCompromissoVo;
 
 public class CompromissoDao extends Dao {
 
@@ -120,41 +122,80 @@ public class CompromissoDao extends Dao {
 		}
 		return null;
 	}
-	
+
 	public void deleteByFuncionario(String codFuncionario) {
 		StringBuilder query = new StringBuilder("DELETE FROM compromisso WHERE cd_funcionario = ?");
+		try (Connection con = getConexao(); PreparedStatement ps = con.prepareStatement(query.toString())) {
+
+			int i = 1;
+			ps.setString(i++, codFuncionario);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean existeCompromissoPorAgenda(String cdAgenda) {
+		StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM compromisso WHERE cd_agenda = ?");
+		try (Connection con = getConexao(); PreparedStatement ps = con.prepareStatement(query.toString())) {
+
+			int i = 1;
+
+			ps.setString(i++, cdAgenda);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1) > 0;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public List<RelatorioCompromissoVo> buscarRelatorio(LocalDate dataIncial, LocalDate dataFinal){
+		StringBuilder query = new StringBuilder("SELECT f.rowid AS codigoFuncionario, f.nm_funcionario AS nomeFuncionario, a.rowid AS codigoAgenda, a.nm_agenda AS nomeAgenda, c.data, c.hora FROM compromisso c " +
+			    "INNER JOIN funcionario f ON c.cd_funcionario = f.rowid " +
+			    "INNER JOIN agenda a ON c.cd_agenda = a.rowid " +
+			    "WHERE c.data BETWEEN ? AND ? " +
+			    "ORDER BY c.data, c.hora");
+		
 		try(Connection con = getConexao();
 				PreparedStatement ps = con.prepareStatement(query.toString())){
 			
 			int i = 1;
-			ps.setString(i++, codFuncionario);
-			ps.executeUpdate();
 			
+			ps.setDate(i++, java.sql.Date.valueOf(dataIncial));
+			ps.setDate(i++, java.sql.Date.valueOf(dataFinal));
+			
+			try(ResultSet rs = ps.executeQuery()){
+				
+			    List<RelatorioCompromissoVo> relatorios = new ArrayList<>();
+
+				while(rs.next()) {
+					
+					RelatorioCompromissoVo vo = new RelatorioCompromissoVo();
+					
+					vo.setCodigoFuncionario(rs.getInt("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nomeFuncionario"));
+					vo.setCodigoAgenda(rs.getInt("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nomeAgenda"));
+					vo.setData(rs.getDate("data").toLocalDate());
+					vo.setHora(rs.getTime("hora").toLocalTime());
+					
+					relatorios.add(vo);
+				}
+				return relatorios;
+			}
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	public boolean existeCompromissoPorAgenda(String cdAgenda) {
-		StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM compromisso WHERE cd_agenda = ?");
-		try(Connection con = getConexao();
-				PreparedStatement ps = con.prepareStatement(query.toString())){
-			
-			int i = 1;
-
-			ps.setString(i++, cdAgenda);
-			
-			try(ResultSet rs = ps.executeQuery()){
-				if(rs.next()) {
-					return rs.getInt(1) > 0;
-				}
-			}
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+		return Collections.emptyList();
 	}
 }
