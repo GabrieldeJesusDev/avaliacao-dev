@@ -55,10 +55,14 @@ public class CompromissoDao extends Dao {
 			ps.setInt(i++, compromissoVo.getCdAgenda());
 			ps.setDate(i++, java.sql.Date.valueOf(compromissoVo.getData()));
 			ps.setTime(i++, java.sql.Time.valueOf(compromissoVo.getHora()));
-			ps.executeUpdate();
+			int linhasAfetadas = ps.executeUpdate();
+
+			if (linhasAfetadas == 0) {
+				throw new RuntimeException("Nenhum compromisso cadastrado");
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Erro ao cadastrar compromisso", e);
 		}
 	}
 
@@ -74,10 +78,14 @@ public class CompromissoDao extends Dao {
 			ps.setDate(i++, java.sql.Date.valueOf(compromissoVo.getData()));
 			ps.setTime(i++, java.sql.Time.valueOf(compromissoVo.getHora()));
 			ps.setString(i++, compromissoVo.getRowid());
-			ps.executeUpdate();
+			int linhasAfetadas = ps.executeUpdate();
 
+			if (linhasAfetadas == 0) {
+				throw new RuntimeException("Compromisso nao encontrado para atualizacao");
+			}
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Erro ao atualizar compromisso", e);
 		}
 	}
 
